@@ -5,6 +5,7 @@ from rest_framework import (decorators,
 
 from api.trader.models import Product
 from api.trader.serializers import (ProductSerializer,
+                                    ProductStoreSerializer,
                                     OrderSerializer,
                                     ProductRevenueSerializer)
 
@@ -27,6 +28,8 @@ class ProductView(mixins.ListModelMixin,
             return OrderSerializer
         if self.action == 'revenue':
             return ProductRevenueSerializer
+        if self.action == 'create':
+            return ProductStoreSerializer
         return ProductSerializer
 
     def list(self, request, *args, **kwargs):
