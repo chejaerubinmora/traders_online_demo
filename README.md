@@ -102,10 +102,6 @@ You can access the Django application running on `127.0.0.1:8000` in your web br
   endpoint: /api/traders/products/<product id>/revenue/
   method: get
   header: Authorization: Bearer <login access token>
-  payload: {
-    "product": 1,
-    "quantity": 1
-  }
   response: {
     "id": 1,
     "name": "Papaya Soap",
