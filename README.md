@@ -37,3 +37,80 @@ docker-compose up -d --build
 5. Access the Django application:
 
 You can access the Django application running on `127.0.0.1:8000` in your web browser.
+
+6. Endpoints
+
+- Register
+  ```
+  endpoint: /api/traders/users/
+  method: post
+  payload: {
+    "first_name": "",
+    "last_name": "",
+    "username": "testuser",
+    "email": "testuser@example.com",
+    "password": "testuser123",
+    "confirm_password": "testuser123"
+   }
+  ```
+- Login
+  ```
+  endpoint: /api/token/login
+  payload: {"username": "testuser", "password": "testuser123"}
+  method: post
+  response: {
+    "refresh": "eyJhbGciOiJIU...",
+    "access": "eyJhbGciOiJIUzI1NiIsI..."
+   }
+  ```
+- Create product
+  ```
+  endpoint: /api/traders/products/
+  method: post
+  header: Authorization: Bearer <login access token>
+  payload: {
+    "quantity": 10,
+    "name": "Papaya Soap",
+    "currency": "$",
+    "price": 5
+  }
+  response: {
+    "id": 14,
+    "quantity": 10,
+    "name": "Papaya Soap",
+    "currency": "$",
+    "price": 5
+  }
+  ```
+- Order
+  ```
+  endpoint: /api/traders/products/order/
+  method: post
+  header: Authorization: Bearer <login access token>
+  payload: {
+    "product": 1,
+    "quantity": 1
+  }
+  response: {
+    "id": 8,
+    "product": 1,
+    "quantity": 2
+  }
+  ```
+- Revenue per stock
+  ```
+  endpoint: /api/traders/products/<product id>/revenue/
+  method: get
+  header: Authorization: Bearer <login access token>
+  payload: {
+    "product": 1,
+    "quantity": 1
+  }
+  response: {
+    "id": 1,
+    "name": "Papaya Soap",
+    "price": "$5",
+    "revenue": "$60"
+  }
+  ```
+  
