@@ -28,6 +28,8 @@ cp .env.example .env
 ```
 Open the `.env` file and set the value of all environment variables.
 
+- Note: the POSTGRES_HOST in the .env should use the docker container service name e.g in the docker-compose.yml service name is db, then my POSTGRES_HOST=db, this will allow you to connect to the docker container db
+
 4. Build and run the Docker containers:
 
 ```bash
