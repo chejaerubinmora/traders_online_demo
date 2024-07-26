@@ -1,41 +1,21 @@
 version: '3'
-
 services:
-  traders_app_db:
-    restart: always
-    container_name: traders-app-db
-    image: postgres:11
+  db:
+    container_name: traders-db
+    image: postgres
     environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_NAME=${POSTGRES_NAME}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "${POSTGRES_LOCAL_PORT}:${POSTGRES_PORT}"
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_NAME}"]
-      interval: 5s
-      timeout: 5s
-      retries: 5
-    volumes:
-      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
-
-  django_backend:
-    container_name: traders-backend
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+  api:
+    container_name: traders-api
     build:
       context: .
       dockerfile: DockerFile
-    entrypoint: /entrypoint.sh
-    command: bash -c "python manage.py runserver 0.0.0.0:${DJANGO_PORT}"
-    ports:
-      - "${DJANGO_PORT}:${DJANGO_PORT}"
+    command: python manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/traders_online_demo
+      - .:/app
+    ports:
+      - "8000:8000"
     depends_on:
-      traders_app_db:
-        condition: service_healthy
-    restart: on-failure
-    healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:${DJANGO_PORT} || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+      - db
