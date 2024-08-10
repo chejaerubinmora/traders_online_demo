@@ -28,7 +28,14 @@ jobs:
           --health-retries 5
 
     env:
-      DATABASE_URL: postgres://user:password@localhost:5432/django_db
+      SECRET_KEY=ijasd89e809wjqwjeqkjeq9weq0w9eqwekcjslkcjzlxkcjzlxc
+      POSTGRES_USER=traders
+      POSTGRES_NAME=traders
+      POSTGRES_PASSWORD=trader123
+      POSTGRES_HOST=db
+      POSTGRES_LOCAL_PORT=5432
+      POSTGRES_PORT=5432
+      DJANGO_PORT=8000
 
     steps:
     - name: Checkout code
