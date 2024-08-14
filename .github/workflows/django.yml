@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     services:
-      db:
+      postgres:
         image: postgres:latest
-        env:
+        environment:
           POSTGRES_DB: traders
           POSTGRES_USER: trader
           POSTGRES_PASSWORD: trader123456
