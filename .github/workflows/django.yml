@@ -7,9 +7,8 @@ on:
   pull_request:
     branches:
       - main
-
-jobs:
-  stages:
+      
+stages:
   - build
   - test
   - deploy
