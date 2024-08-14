@@ -16,9 +16,9 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: django_db
-          POSTGRES_USER: user
-          POSTGRES_PASSWORD: password
+          POSTGRES_DB: traders
+          POSTGRES_USER: trader
+          POSTGRES_PASSWORD: trader123456
         ports:
           - 5432:5432
         options: >-
