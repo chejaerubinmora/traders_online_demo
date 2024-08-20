@@ -15,7 +15,7 @@ jobs:
     services:
       postgres:
         image: postgres:latest
-        environment:
+        env:
           POSTGRES_DB: traders
           POSTGRES_USER: trader
           POSTGRES_PASSWORD: trader123456
